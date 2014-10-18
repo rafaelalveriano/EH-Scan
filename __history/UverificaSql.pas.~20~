@@ -1,0 +1,38 @@
+unit UverificaSql;
+
+interface
+
+uses classes,InicioProg;
+
+type
+
+ VerificaFalha = class(TThread)
+
+  protected
+
+  procedure Execute;override;
+
+ end;
+
+
+
+
+implementation
+
+
+
+{ VerificaFalha }
+
+procedure VerificaFalha.Execute;
+
+ Var
+
+  QtdeSites , I : Integer;
+
+begin
+
+
+
+end;
+
+end.

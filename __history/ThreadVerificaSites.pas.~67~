@@ -1,0 +1,62 @@
+unit ThreadVerificaSites;
+
+interface
+
+uses classes, Controls,Forms, SysUtils, FrmAtomic,Windows,Graphics, Messages, Dialogs;
+
+//type
+//  VerificaSql = class(TThread)
+
+//  public
+//  procedure Execute; override;
+
+//  end;
+
+
+
+
+
+implementation
+
+//Var
+
+      // BuscaBing : Integer;
+      // A , B : Integer;
+       //Puxa : String ;
+       //FalhaSql : Integer;
+
+
+{  VerificaSql }
+
+{procedure  VerificaSql.Execute;
+begin
+
+
+With Form1 Do Begin // Inicio do form1
+
+      BuscaBing := MemoBusca.Lines.Count;
+
+      for A := 0 to BuscaBing - 1 do
+      Begin
+
+           Puxa := Http.Get(MemoBusca.Lines.Strings[A]+Aspa.Text);
+           FalhaSql := MemoFalhas.Lines.Count;
+
+           for B := 0 to FalhaSql do
+           Begin
+               StatusSql.Caption := 'Scaneando o seguinte site: ' + MemoBusca.Lines.Strings[A]+Aspa.Text;
+               if (pos(MemoFalhas.Lines.Strings[B],Puxa)) > 0 then
+               LvSql.Items.Add.SubItems.Add(MemoBusca.Lines.Strings[A]);
+               MemoSaveVul.Lines.Add(MemoBusca.Lines.Strings[A]);
+           End ;
+
+           end;
+
+
+
+End; // fim do form 1
+
+end;
+
+end.
+

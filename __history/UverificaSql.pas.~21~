@@ -1,0 +1,46 @@
+unit UverificaSql;
+
+interface
+
+uses classes,InicioProg;
+
+type
+
+ VerificaFalha = class(TThread)
+
+  protected
+
+  procedure Execute;override;
+
+ end;
+
+
+
+
+implementation
+
+
+
+{ VerificaFalha }
+
+procedure VerificaFalha.Execute;
+
+ Var
+
+  QtdeSites , I   : Integer;
+
+begin
+
+  QtdeSites := Form1.BoxSites.Lines.Count; 
+
+  for I := 0 to QtdeSites - 1 do
+
+  Begin   
+
+       Form1.Baixa.Get(Form1.BoxSites.Lines.Strings[I]);
+      
+  End;
+
+end;
+
+end.

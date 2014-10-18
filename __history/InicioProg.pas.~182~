@@ -1,0 +1,198 @@
+unit InicioProg;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, OleCtrls, SHDocVw, StdCtrls, Spin, ExtCtrls, Buttons,
+  sSkinProvider, sSkinManager, acProgressBar, sDialogs, sEdit, sSpinEdit,
+  ImgList,ShellApi, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
+  IdHTTP;
+
+type
+  TForm1 = class(TForm)
+    Pages: TPageControl;
+    PageBuscaSite: TTabSheet;
+    Panel1: TPanel;
+    TxtDorks: TComboBox;
+    Label1: TLabel;
+    Btn: TSpeedButton;
+    Skin: TsSkinManager;
+    Pr: TsSkinProvider;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    Barra: TsProgressBar;
+    Save: TsSaveDialog;
+    Paginas: TsSpinEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    TabSql: TTabSheet;
+    Panel2: TPanel;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    SpeedButton8: TSpeedButton;
+    SpeedButton9: TSpeedButton;
+    BoxSites: TMemo;
+    Label4: TLabel;
+    LvSql: TListView;
+    ImageList1: TImageList;
+    WebBrowser1: TWebBrowser;
+    Baixa: TIdHTTP;
+    Timer1: TTimer;
+    procedure TxtDorksEnter(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure WebDocumentComplete(ASender: TObject; const pDisp: IDispatch;
+      var URL: OleVariant);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure WebProgressChange(ASender: TObject; Progress,
+      ProgressMax: Integer);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure BtnClick(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure SpeedButton9Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+
+  Form1: TForm1;
+
+//Busca Sites
+  Dork : String ;
+  Count : String ;
+  Pag: String ;
+
+//Mysql
+  SitesCount , I : Integer;
+
+
+
+
+implementation
+
+uses UverificaSql, Uthread, ComponentesEscondidos;
+
+{$R *.dfm}
+
+procedure TForm1.BtnClick(Sender: TObject);
+
+
+begin
+
+     Dork := TxtDorks.Text;
+     Pag  := Paginas.Text;
+     Count:= Pag+'1';
+     Componentes.Web.Navigate('http://br.bing.com/search?q='+Dork+'&first='+Count+'&FORM=PERE');
+
+
+
+
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+begin
+     Skin.SkinName := '3 (internal)';
+end;
+
+procedure TForm1.SpeedButton2Click(Sender: TObject);
+begin
+    Web.Stop;
+end;
+
+procedure TForm1.SpeedButton3Click(Sender: TObject);
+begin
+     if (Save.Execute()) then
+     Begin
+        BoxSites.Lines.SaveToFile(Save.FileName);
+     End;
+end;
+
+procedure TForm1.SpeedButton4Click(Sender: TObject);
+begin
+     BoxSites.Clear;
+end;
+
+procedure TForm1.SpeedButton5Click(Sender: TObject);
+
+Var
+
+  Verifica : VerificaFalha;
+
+begin
+
+  if ( BoxSites.Lines.Text = '') then
+  Begin
+      ShowMessage('Nenhum site encontrado!');
+      PageBuscaSite.Show;
+  End
+
+  Else
+
+      Begin
+
+      Verifica := VerificaFalha.Create(True);
+      Verifica.FreeOnTerminate := True;
+      Verifica.Resume;
+
+      End;
+
+end;
+
+
+procedure TForm1.SpeedButton6Click(Sender: TObject);
+begin
+     Baixa.Destroy;
+end;
+
+procedure TForm1.SpeedButton7Click(Sender: TObject);
+begin
+     LvSql.Clear;
+end;
+
+procedure TForm1.SpeedButton9Click(Sender: TObject);
+begin
+    //AbreSite.Clear;
+    //AbreSite.Text := IntToStr(LvSql.ItemIndex);
+    //ShellExecute(Handle,'open',PwideChar(AbreSite.Text),nil,nil,SW_SHOWNORMAL);
+end;
+
+procedure TForm1.TxtDorksEnter(Sender: TObject);
+begin
+      TxtDorks.Items.LoadFromFile('dorks/dorks.txt');
+end;
+
+procedure TForm1.WebDocumentComplete(ASender: TObject; const pDisp: IDispatch;
+  var URL: OleVariant);
+
+begin
+
+   BoxSites.Lines.Add('http://'+Web.OleObject.Document.All.Tags('cite').Item(0).InnerText);
+   BoxSites.Lines.Add('http://'+Web.OleObject.Document.All.Tags('cite').Item(1).InnerText);
+   BoxSites.Lines.Add('http://'+Web.OleObject.Document.All.Tags('cite').Item(2).InnerText);
+   BoxSites.Lines.Add('http://'+Web.OleObject.Document.All.Tags('cite').Item(3).InnerText);
+   BoxSites.Lines.Add('http://'+Web.OleObject.Document.All.Tags('cite').Item(4).InnerText);
+   BoxSites.Lines.Add('http://'+Web.OleObject.Document.All.Tags('cite').Item(5).InnerText);
+   BoxSites.Lines.Add('http://'+Web.OleObject.Document.All.Tags('cite').Item(6).InnerText);
+   BoxSites.Lines.Add('http://'+Web.OleObject.Document.All.Tags('cite').Item(7).InnerText);
+   BoxSites.Lines.Add('http://'+Web.OleObject.Document.All.Tags('cite').Item(8).InnerText);
+   BoxSites.Lines.Add('http://'+Web.OleObject.Document.All.Tags('cite').Item(9).InnerText);
+   Label4.Caption := IntToStr(BoxSites.Lines.Count) + ' Sites Encontrados!';
+
+end;
+
+procedure TForm1.WebProgressChange(ASender: TObject; Progress,
+  ProgressMax: Integer);
+begin
+     if (Progress >=1)and(ProgressMax>1) then
+     Barra.Position :=  Round((Progress * 100)Div ProgressMax);
+end;
+
+end.

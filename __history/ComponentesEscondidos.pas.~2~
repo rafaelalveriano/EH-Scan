@@ -1,0 +1,27 @@
+unit ComponentesEscondidos;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, OleCtrls, SHDocVw, StdCtrls;
+
+type
+  TComponentes = class(TForm)
+    MostraSitesVul: TButton;
+    TxtAspa: TEdit;
+    Web: TWebBrowser;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Componentes: TComponentes;
+
+implementation
+
+{$R *.dfm}
+
+end.

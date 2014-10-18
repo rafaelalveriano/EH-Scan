@@ -1,0 +1,18 @@
+unit Uthread;
+
+interface
+
+uses classes, InicioProg;
+
+type
+
+  Th = class(TThread)
+
+  protected
+  procedure Execute; override;
+
+  end;
+
+implementation
+
+end.

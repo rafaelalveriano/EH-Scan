@@ -1,0 +1,8 @@
+You have an error in your SQL syntax
+MySQL server version
+Syntax error converting the nvarchar value
+SQL Server error
+mysql_fetch_assoc():
+Mysql_fetch_assoc():
+Warning:
+Erro ao executar consulta no banco

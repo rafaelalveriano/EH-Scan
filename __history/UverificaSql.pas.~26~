@@ -1,0 +1,60 @@
+unit UverificaSql;
+
+interface
+
+uses classes,InicioProg;
+
+type
+
+ VerificaFalha = class(TThread)
+
+  protected
+
+  procedure Execute;override;
+
+ end;
+
+
+
+
+implementation
+
+uses ComponentesEscondidos, Uthread;
+
+
+
+{ VerificaFalha }
+
+procedure VerificaFalha.Execute;
+
+ Var
+
+  LinhaDoSite , I   : Integer;
+  Aspa, Puxa ,  SiteAtual : String ;
+
+
+begin
+
+
+    LinhaDoSite := Form1.BoxSites.Lines.Count;
+    Aspa := Form1.TxtAspa.Text;
+
+    for I := 0 to LinhaDoSite - 1 do
+
+    Begin     //Incicia Verificação
+
+         SiteAtual := Form1.BoxSites.Lines.Strings[I]+Aspa;
+         try
+
+            Puxa := Form1.Baixa.Get(SiteAtual);
+
+         Except
+
+         end;
+
+    End;  // Fim da Incicia Verificação
+
+
+end;
+
+end.

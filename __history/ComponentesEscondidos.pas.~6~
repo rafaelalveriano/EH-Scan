@@ -1,0 +1,58 @@
+unit ComponentesEscondidos;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, OleCtrls, SHDocVw, StdCtrls;
+
+type
+  TComponentes = class(TForm)
+    MostraSitesVul: TButton;
+    TxtAspa: TEdit;
+    Web: TWebBrowser;
+    procedure WebDocumentComplete(ASender: TObject; const pDisp: IDispatch;
+      var URL: OleVariant);
+    procedure WebProgressChange(ASender: TObject; Progress,
+      ProgressMax: Integer);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Componentes: TComponentes;
+
+implementation
+
+uses UverificaSql, Uthread, InicioProg;
+
+{$R *.dfm}
+
+procedure TComponentes.WebDocumentComplete(ASender: TObject;
+  const pDisp: IDispatch; var URL: OleVariant);
+begin
+
+   Form1.BoxSites.Lines.Add('http://'+Componentes.Web.OleObject.Document.All.Tags('cite').Item(0).InnerText);
+   Form1.BoxSites.Lines.Add('http://'+Componentes.Web.OleObject.Document.All.Tags('cite').Item(1).InnerText);
+   Form1.BoxSites.Lines.Add('http://'+Componentes.Web.OleObject.Document.All.Tags('cite').Item(2).InnerText);
+   Form1.BoxSites.Lines.Add('http://'+Componentes.Web.OleObject.Document.All.Tags('cite').Item(3).InnerText);
+   Form1.BoxSites.Lines.Add('http://'+Componentes.Web.OleObject.Document.All.Tags('cite').Item(4).InnerText);
+   Form1.BoxSites.Lines.Add('http://'+Componentes.Web.OleObject.Document.All.Tags('cite').Item(5).InnerText);
+   Form1.BoxSites.Lines.Add('http://'+Componentes.Web.OleObject.Document.All.Tags('cite').Item(6).InnerText);
+   Form1.BoxSites.Lines.Add('http://'+Componentes.Web.OleObject.Document.All.Tags('cite').Item(7).InnerText);
+   Form1.BoxSites.Lines.Add('http://'+Componentes.Web.OleObject.Document.All.Tags('cite').Item(8).InnerText);
+   Form1.BoxSites.Lines.Add('http://'+Componentes.Web.OleObject.Document.All.Tags('cite').Item(9).InnerText);
+   Form1.Label4.Caption := IntToStr(Form1.BoxSites.Lines.Count) + ' Sites Encontrados!';
+
+end;
+
+procedure TComponentes.WebProgressChange(ASender: TObject; Progress,
+  ProgressMax: Integer);
+begin
+     if (Progress >=1)and(ProgressMax>1) then
+     Form1.Barra.Position :=  Round((Progress * 100)Div ProgressMax);
+end;
+
+end.

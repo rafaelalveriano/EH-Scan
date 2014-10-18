@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012/04/08 20:17:52.993.pas,C:\Users\rafael\Documents\RAD Studio\Projects\Unit1.pas=C:\Scanner Atomic\FrmAtomic.pas</Transaction>
+    <Transaction>2012/04/08 20:17:52.993.dfm,C:\Users\rafael\Documents\RAD Studio\Projects\Unit1.dfm=C:\Scanner Atomic\FrmAtomic.dfm</Transaction>
+    <Transaction>2012/04/08 20:18:01.512.dproj,C:\Users\rafael\Documents\RAD Studio\Projects\Project1.dproj=C:\Scanner Atomic\Scanner_Atomic.dproj</Transaction>
+    <Transaction>2012/04/09 00:43:47.568.pas,C:\Scanner Atomic\Unit1.pas=C:\Scanner Atomic\ThreadVerificaSites.pas</Transaction>
+    <Transaction>2012/04/13 00:56:22.320.pas,C:\Scanner Atomic\Unit2.pas=C:\Scanner Atomic\RefSitesMd5.pas</Transaction>
+    <Transaction>2012/04/13 00:56:22.320.dfm,C:\Scanner Atomic\Unit2.dfm=C:\Scanner Atomic\RefSitesMd5.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

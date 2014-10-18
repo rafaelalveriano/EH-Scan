@@ -1,0 +1,15 @@
+unit Uthread;
+
+interface
+
+uses classes, InicioProg;
+
+type
+
+  Th = class(TThread)
+
+  end;
+
+implementation
+
+end.
