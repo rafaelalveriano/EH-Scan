@@ -1,4 +1,6 @@
---- Elite Hacker Scan --- Coded By: MovCode (Rafael Augusto)
+<h3><b>--- Elite Hacker Scan --- <b></h3> 
+
+Autor: Rafael Augusto [movcode]
 
 Funções:
 
